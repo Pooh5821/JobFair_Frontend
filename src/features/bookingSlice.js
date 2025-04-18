@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import bookingService from "./bookingService";
 
 const initialState = {
-    user: user? user : null,
     booking: null,
     loading: false,
     error: null,
@@ -23,23 +22,14 @@ export const bookingSlice = createSlice({
     name: "booking",
     initialState,
     reducers: {
-        bookingRequest: (state) => {
-            state.loading = true;
-        },
-        bookingSuccess: (state, action) => {
+        reset: (state) => {
             state.loading = false;
-            state.success = true;
-            state.booking = action.payload;
-        },
-        bookingFail: (state, action) => {
-            state.loading = false;
-            state.error = action.payload;
-        },
-        clearErrors: (state) => {
             state.error = null;
+            state.success = false;
+            state.message = '';
         },
     },
 });
 
-export const {reset} = bookingSlice.actions;
+export const { reset } = bookingSlice.actions;
 export default bookingSlice.reducer;
