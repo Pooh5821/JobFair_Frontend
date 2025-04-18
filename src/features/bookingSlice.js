@@ -29,6 +29,22 @@ export const bookingSlice = createSlice({
             state.message = '';
         },
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getBookings.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getBookings.fulfilled, (state, action) => {
+                state.loading = false;
+                state.success = true;
+                state.booking = action.payload;
+            })
+            .addCase(getBookings.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+                state.message = action.error.message;
+            });
+    }
 });
 
 export const { reset } = bookingSlice.actions;
