@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from 'react-redux'
 import { reset, getBookings } from "../features/bookingSlice";
 import { useNavigate } from 'react-router-dom'
+import Booking from "../components/Booking";
 
 function Dashboard() {
     const dispatch = useDispatch()
@@ -14,15 +15,19 @@ function Dashboard() {
         if(isError){
             toast.error(message)
         }
-        if(isSuccess){
-            console.log(bookings)
-        }
         dispatch(reset())
     }, [isError, isSuccess, bookings, message, navigate, dispatch])
 
-    const fetchBookings = () => {
+    useEffect(() => {
         dispatch(getBookings())
-    }
+    }, [dispatch])
+
+    return (
+        <div>
+            <h1>Dashboard</h1>
+            <Booking bookings={bookings} />
+        </div>
+    );
 }
 
 export default Dashboard;

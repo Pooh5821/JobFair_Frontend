@@ -23,7 +23,7 @@ function Login() {
             toast.error(message)
         }
         if(isSuccess){
-            navigate('/')
+            navigate('/bookings')
         }
         dispatch(reset())
     }, [isError, isSuccess, user, message, navigate, dispatch])
