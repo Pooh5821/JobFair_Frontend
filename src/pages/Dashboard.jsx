@@ -10,6 +10,7 @@ function Dashboard() {
     const navigate = useNavigate()
 
     const {bookings, isLoading, isError, isSuccess, message} = useSelector((state)=>state.booking)
+    const {token} = useSelector((state)=>state.auth.token)
 
     useEffect(()=>{
         if(isError){
@@ -19,7 +20,7 @@ function Dashboard() {
     }, [isError, isSuccess, bookings, message, navigate, dispatch])
 
     useEffect(() => {
-        dispatch(getBookings())
+        dispatch(getBookings(token))
     }, [dispatch])
 
     return (
