@@ -9,7 +9,7 @@ const initialState = {
     message: '',
 };
 
-export const getBookings = async () => {
+export const getBookings = async (token) => {
     try {
         return await bookingService.getBookings(token);
     } catch (error) {
