@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from 'react-redux'
-import { reset, getBookings } from "../features/bookingSlice";
+import { reset, getBookings } from "../features/booking/bookingSlice";
 import { useNavigate } from 'react-router-dom'
 import Booking from "../components/Booking";
 
