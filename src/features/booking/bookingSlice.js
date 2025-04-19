@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import bookingService from "./bookingService";
 
 const initialState = {
@@ -9,14 +9,16 @@ const initialState = {
     message: '',
 };
 
-export const getBookings = async (token) => {
-    try {
-        return await bookingService.getBookings(token);
-    } catch (error) {
-        console.error("Error fetching bookings:", error);
-        throw error;
+export const getBookings = createAsyncThunk(
+    "booking/getBookings",
+    async (token, thunkAPI) => {
+        try {
+            return await bookingService.getBookings(token);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response?.data || error.message);
+        }
     }
-}
+);
 
 export const bookingSlice = createSlice({
     name: "booking",
