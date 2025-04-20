@@ -8,9 +8,17 @@ import Booking from "../components/Booking";
 function Dashboard() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
+    
     const {bookings, isLoading, isError, isSuccess, message} = useSelector((state)=>state.booking)
-    const {token} = useSelector((state)=>state.auth.token)
+    const {token} = useSelector((state)=>state.auth?.token)
+
+    console.log(token)
+
+    useEffect(() => {
+        if (!token) {
+            navigate('/');
+        }
+    }, [token, navigate]);
 
     useEffect(()=>{
         if(isError){
@@ -20,8 +28,11 @@ function Dashboard() {
     }, [isError, isSuccess, bookings, message, navigate, dispatch])
 
     useEffect(() => {
-        dispatch(getBookings(token))
-    }, [dispatch])
+        if (token) {
+            console.log(token)
+            dispatch(getBookings(token));
+        }
+    }, [dispatch, token]);
 
     return (
         <div>

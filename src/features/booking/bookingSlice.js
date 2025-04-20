@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import bookingService from "./bookingService";
 
+const token = localStorage.getItem("token");
+
 const initialState = {
-    token: '',
+    token: token ? token : "",
     booking: [],
     loading: false,
     error: null,

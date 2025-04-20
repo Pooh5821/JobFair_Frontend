@@ -21,8 +21,12 @@ function Login() {
     useEffect(()=>{
         if(isError){
             toast.error(message)
+            setFormData({
+                email: '',
+                password: ''
+            })
         }
-        if(isSuccess){
+        else if(isSuccess){
             navigate('/bookings')
         }
         dispatch(reset())
