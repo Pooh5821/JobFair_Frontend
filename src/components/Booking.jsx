@@ -18,7 +18,7 @@ function Booking({ bookings = [] }) {
                 {allBookings.map((booking) => (
                     <li key={booking.id}>
                         <h3>{booking.company?.name}</h3>
-                        <p>{booking.bookDate}</p>
+                        <p>{new Date(booking.bookDate).toLocaleString('en-US', { timeZone: 'UTC' })}</p>
                         <p>-------------------------------------</p>
                     </li>
                 ))}
