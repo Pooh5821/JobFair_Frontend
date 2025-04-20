@@ -6,18 +6,18 @@ const login = async (userData) => {
     try {
         const response = await axios.post(API_URL+'login',userData)
         if(response.data) {
-            localStorage.setItem('user',response.data.name)
+            localStorage.setItem('token',response.data.token)
             console.log(response.data.name)
             console.log(response.data.token)
         }
-        return response.data.name
+        return response.data.token
     } catch(error) {
         console.log('authService: login')
         console.log(error);
     }
 }
 const logout = () => {
-    localStorage.setItem('user',null)
+    localStorage.setItem('token',null)
 }
 const authService ={
     login, logout

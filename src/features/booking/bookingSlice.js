@@ -5,10 +5,10 @@ const token = localStorage.getItem("token");
 
 const initialState = {
     token: token ? token : "",
-    booking: [],
-    loading: false,
-    error: null,
-    success: false,
+    bookings: [],
+    isLoading: false,
+    isError: null,
+    isSuccess: false,
     message: '',
 };
 
@@ -28,26 +28,26 @@ export const bookingSlice = createSlice({
     initialState,
     reducers: {
         reset: (state) => {
-            state.loading = false;
-            state.error = null;
-            state.success = false;
+            state.isLoading = false;
+            state.isError = null;
+            state.isSuccess = false;
             state.message = '';
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(getBookings.pending, (state) => {
-                state.loading = true;
+                state.isLoading = true;
             })
             .addCase(getBookings.fulfilled, (state, action) => {
-                state.loading = false;
-                state.success = true;
-                state.booking = action.payload;
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.bookings = action.payload;
             })
             .addCase(getBookings.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-                state.message = action.error.message;
+                state.isLoading = false;
+                state.isError = action.payload;
+                state.message = action.isError.message;
             });
     }
 });

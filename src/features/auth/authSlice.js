@@ -3,17 +3,14 @@ import authService from './authService'
 
 //Get user from localstorage
 //const user = JSON.parse(localStorage.getItem('user'))
-const user=localStorage.getItem('user')
 const token=localStorage.getItem('token')
 
 const initialState={
-    user: user? user: null,
-    //user: null,
+    token: token ? token : null,
     isError: false,
     isSuccess:false,
     isLoading: false,
-    message: '',
-    token: token ? token : ''
+    message: ''
 }
 
 //Login user
@@ -53,10 +50,7 @@ export const authSlice = createSlice({
         .addCase(login.fulfilled,(state, action)=>{
             state.isLoading = false
             state.isSuccess=true
-            state.user=action.payload.user
-            state.token=action.payload.token
-
-            localStorage.setItem('token',action.payload.token)
+            state.token=action.payload
         })
         .addCase(login.rejected,(state, action)=>{
             state.isLoading = false

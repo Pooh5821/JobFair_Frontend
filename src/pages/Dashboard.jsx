@@ -9,10 +9,10 @@ function Dashboard() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     
-    const {bookings, isLoading, isError, isSuccess, message} = useSelector((state)=>state.booking)
-    const {token} = useSelector((state)=>state.auth?.token)
+    const {token, bookings = [], isLoading, isError, isSuccess, message} = useSelector((state)=>state.booking)
 
     console.log(token)
+    console.log(bookings)
 
     useEffect(() => {
         if (!token) {
@@ -29,7 +29,6 @@ function Dashboard() {
 
     useEffect(() => {
         if (token) {
-            console.log(token)
             dispatch(getBookings(token));
         }
     }, [dispatch, token]);
@@ -37,7 +36,7 @@ function Dashboard() {
     return (
         <div>
             <h1>Dashboard</h1>
-            <Booking bookings={bookings} />
+            <Booking bookings={Array(bookings)} />
         </div>
     );
 }
